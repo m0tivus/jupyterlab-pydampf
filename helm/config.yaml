@@ -19,10 +19,16 @@
 #
 # minikube -p pydampf service list
 
-
 singleuser:
-  image: 
+  image:
     name: jupyter/datascience-notebook
     tag: python-3.9.13
   cmd: null
-
+hub:
+  config:
+    GitHubOAuthenticator:
+      client_id: ff457d720f968813104c
+      client_secret: c7ee56658eb43fc20e200d5c192fa46c73fcb321
+      oauth_callback_url: http://localhost:32674/hub/oauth_callback
+    JupyterHub:
+      authenticator_class: github
