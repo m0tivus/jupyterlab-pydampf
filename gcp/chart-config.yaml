@@ -8,24 +8,10 @@
 # Chart default values:     https://github.com/jupyterhub/zero-to-jupyterhub-k8s/blob/HEAD/jupyterhub/values.yaml
 # Available chart versions: https://jupyterhub.github.io/helm-chart/
 
-# minikube start -p pydampf
-#
-# helm upgrade --cleanup-on-fail \
-#   --install jupyterhub-pydampf jupyterhub/jupyterhub \
-#     --namespace pydampf \
-#       --create-namespace \
-#         --version=2.0.0 \
-#           --values config.yaml
-#
-# minikube -p pydampf service list
-
-
 singleuser:
-  # defaultUrl: "/lab"
   image: 
     name: southamerica-west1-docker.pkg.dev/motivus-257216/jpn/pydampf
     tag: "1"
-  # cmd: null
   lifecycleHooks:
     postStart:
       exec:
@@ -34,4 +20,11 @@ singleuser:
           - "-c"
           - >
             cp -rn /tmp/home-base/* /home/jovyan
-
+hub:
+  config:
+    GitHubOAuthenticator:
+      client_id: ff457d720f968813104c
+      client_secret: c7ee56658eb43fc20e200d5c192fa46c73fcb321
+      oauth_callback_url: http://localhost:32674/hub/oauth_callback
+    JupyterHub:
+      authenticator_class: github
