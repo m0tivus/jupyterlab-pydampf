@@ -8,22 +8,18 @@
 # Chart default values:     https://github.com/jupyterhub/zero-to-jupyterhub-k8s/blob/HEAD/jupyterhub/values.yaml
 # Available chart versions: https://jupyterhub.github.io/helm-chart/
 
-# minikube start -p pydampf
-#
-# helm upgrade --cleanup-on-fail \
-#   --install jupyterhub-pydampf jupyterhub/jupyterhub \
-#     --namespace pydampf \
-#       --create-namespace \
-#         --version=2.0.0 \
-#           --values config.yaml
-#
-# minikube -p pydampf service list
-
 singleuser:
-  image:
-    name: jupyter/datascience-notebook
-    tag: python-3.9.13
-  cmd: null
+  image: 
+    name: southamerica-west1-docker.pkg.dev/motivus-257216/jpn/pydampf
+    tag: "1"
+  lifecycleHooks:
+    postStart:
+      exec:
+        command:
+          - "sh"
+          - "-c"
+          - >
+            cp -rn /tmp/home-base/* /home/jovyan
 hub:
   config:
     GitHubOAuthenticator:
