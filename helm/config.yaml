@@ -21,8 +21,17 @@
 
 
 singleuser:
+  # defaultUrl: "/lab"
   image: 
-    name: jupyter/datascience-notebook
-    tag: python-3.9.13
-  cmd: null
+    name: southamerica-west1-docker.pkg.dev/motivus-257216/jpn/pydampf
+    tag: latest
+  # cmd: null
+  lifecycleHooks:
+    postStart:
+      exec:
+        command:
+          - "sh"
+          - "-c"
+          - >
+            cp -rn /tmp/home-base /home/jovyan
 
