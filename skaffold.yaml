@@ -2,24 +2,42 @@ apiVersion: skaffold/v2beta29
 kind: Config
 metadata:
   name: pydampf
-deploy:
-  helm:
-    releases:
-      - name: jupyter-lab-pydampf
+profiles:
+  - name: dev
+    deploy:
+      helm:
+        releases:
+          - name: jupyter-lab-pydampf
+            namespace: pydampf
+            createNamespace: true
+            repo: https://jupyterhub.github.io/helm-chart/
+            remoteChart: jupyterhub
+            version: 1.2.0
+            valuesFiles:
+              - dev/chart-config.yaml
+            recreatePods: false
+            skipBuildDependencies: false
+            useHelmSecrets: false
+            wait: false
+    portForward:
+      - port: 80
         namespace: pydampf
-        createNamespace: true
-        repo: https://jupyterhub.github.io/helm-chart/
-        remoteChart: jupyterhub
-        version: 2.0.0
-        valuesFiles:
-          - helm/config.yaml
-        recreatePods: false
-        skipBuildDependencies: false
-        useHelmSecrets: false
-        wait: false
-portForward:
-  - port: 80
-    namespace: pydampf
-    localPort: 32674
-    resourceName: proxy-public
-    resourceType: Service
+        localPort: 32674
+        resourceName: proxy-public
+        resourceType: Service
+  - name: gcp
+    deploy:
+      helm:
+        releases:
+          - name: jupyter-lab-pydampf
+            namespace: pydampf
+            createNamespace: true
+            repo: https://jupyterhub.github.io/helm-chart/
+            remoteChart: jupyterhub
+            version: 1.2.0
+            valuesFiles:
+              - gcp/chart-config.yaml
+            recreatePods: false
+            skipBuildDependencies: false
+            useHelmSecrets: false
+            wait: false
