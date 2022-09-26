@@ -24,7 +24,7 @@ singleuser:
   # defaultUrl: "/lab"
   image: 
     name: southamerica-west1-docker.pkg.dev/motivus-257216/jpn/pydampf
-    tag: latest
+    tag: "1"
   # cmd: null
   lifecycleHooks:
     postStart:
@@ -33,5 +33,5 @@ singleuser:
           - "sh"
           - "-c"
           - >
-            cp -rn /tmp/home-base /home/jovyan
+            cp -rn /tmp/home-base/* /home/jovyan
 
