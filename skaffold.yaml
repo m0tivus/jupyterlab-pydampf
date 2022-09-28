@@ -25,6 +25,9 @@ profiles:
         localPort: 32674
         resourceName: proxy-public
         resourceType: Service
+  # El service account debe tener permisos en IAM y crear un cluster role binding antes de hacer el deploy en gcp
+  # gcloud projects add-iam-policy-binding motivus-257216 --member=user:fernando@motivus.cl --role=roles/container.admin
+  # kubectl create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --user=fernando@motivus.cl
   - name: gcp
     deploy:
       helm:

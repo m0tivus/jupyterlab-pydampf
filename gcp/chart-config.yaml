@@ -20,11 +20,23 @@ singleuser:
           - "-c"
           - >
             cp -rn /tmp/home-base/* /home/jovyan
+  storage:
+    capacity: 20Gi
+    dynamic:
+      storageClass: standard
 hub:
   config:
     GitHubOAuthenticator:
-      client_id: ff457d720f968813104c
-      client_secret: c7ee56658eb43fc20e200d5c192fa46c73fcb321
-      oauth_callback_url: http://localhost:32674/hub/oauth_callback
+      client_id: e81fd8f13d78b4a0f721
+      client_secret: 4c7e22278a191b4eb728b7ecbf812bc37c7b787e
+      oauth_callback_url: https://pydampf.motivus.cl/hub/oauth_callback
     JupyterHub:
       authenticator_class: github
+
+proxy:
+  https:
+    enabled: true
+    hosts:
+      - pydampf.motivus.cl
+    letsencrypt:
+      contactEmail: sebastian@motivus.cl
