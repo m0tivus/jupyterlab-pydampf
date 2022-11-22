@@ -11,7 +11,7 @@
 singleuser:
   image: 
     name: southamerica-west1-docker.pkg.dev/motivus-257216/jpn/pydampf
-    tag: "1"
+    tag: "3"
   lifecycleHooks:
     postStart:
       exec:
@@ -24,6 +24,10 @@ singleuser:
     capacity: 20Gi
     dynamic:
       storageClass: standard
+scheduling:
+  userPods:
+    nodeAffinity:
+      matchNodePurpose: require
 hub:
   config:
     GitHubOAuthenticator:
