@@ -9,7 +9,7 @@
 # Available chart versions: https://jupyterhub.github.io/helm-chart/
 
 singleuser:
-  image: 
+  image:
     name: southamerica-west1-docker.pkg.dev/motivus-257216/jpn/pydampf
     tag: "1"
   lifecycleHooks:
